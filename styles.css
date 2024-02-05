@@ -1,0 +1,39 @@
+body{
+    background-color: rgb(29, 29, 59);
+    color: white;
+}
+h1{
+    text-align: center;
+}
+.container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(234, 245, 255);
+    width: 500px;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 800px;
+    color: black;
+}
+#inner{
+    display: flex;
+}
+#inside{
+    margin-top: 20px;
+    width: 400px;
+    height: 400px;
+    background-color: rgb(245, 247, 249);
+}
+#rows{
+    width:  400px;
+    display: flex;
+    justify-content: space-between;
+}
+#behaviour-container{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    
+}
