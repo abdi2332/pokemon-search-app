@@ -17,6 +17,10 @@ h1{
     height: 800px;
     color: black;
 }
+#search-button{
+    cursor: pointer;
+}
+
 #inner{
     display: flex;
 }
@@ -35,5 +39,7 @@ h1{
     width: 400px;
     display: flex;
     flex-direction: column;
-    
+}
+#behaviour-container p{
+    padding-right: 200px;
 }
