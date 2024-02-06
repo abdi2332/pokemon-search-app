@@ -17,9 +17,23 @@ h1{
     height: 800px;
     color: black;
 }
+#search-input{
+    padding: 5px 10px 5px;
+}
 #search-button{
     cursor: pointer;
+    background-color: rgb(28, 91, 173);
+    color: white;
+    border: none;
+    margin-left: 7px;
+    padding: 5px 10px 5px;
+    border-radius: 7px;
+    font-size: smaller;
 }
+#search-button:hover{
+    background-color: rgb(4, 43, 127);
+}
+
 
 #inner{
     display: flex;
@@ -30,16 +44,12 @@ h1{
     height: 400px;
     background-color: rgb(245, 247, 249);
 }
-#rows{
-    width:  400px;
+#inside p{
+    margin-left: 20px;
+}
+#both{
+    width: 400px;
     display: flex;
     justify-content: space-between;
 }
-#behaviour-container{
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-}
-#behaviour-container p{
-    padding-right: 200px;
-}
+
