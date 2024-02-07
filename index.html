@@ -4,8 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pokemon search app</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+  <h1>Pokémon Search App</h1>
+  <div class="container">
+    <h3>Search for Pokémon Name or ID:</h3>
+   <div id="inner"> 
+    <input type="text" id="search-input" required>
+    <button id="search-button">Search</button>
+  </div>
+    <div id="inside">
+<p id="pokemon-name"></p>
+<p id="pokemon-id"></p>
+<p id="weight"></p>
+<p id="height"></p>
+<p id="types"></p>
+<div id="image-container"></div>
+    </div>
+    <div id="both">
+    <div id="rows">
+      <h3>Stats</h3>
+      <p>Hp:</p>
+      <p>Attack:</p>
+      <p>Defence:</p>
+      <p>Sp. Attack:</p>
+      <p>Sp. Defence:</p>
+      <p>Speed:</p>
+    </div>
+      <div id="behaviour-container">
+      <h3>Base</h3>
+      <p id="hp"></p>
+      <p id="attack"></p>
+      <p id="defense"></p>
+      <p id="special-attack"></p>
+      <p id="special-defense"></p>
+      <p id="speed"></p>
+    </div>
+  </div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
