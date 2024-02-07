@@ -13,79 +13,65 @@ const specialAttack=document.getElementById("special-attack")
 const specialDefence=document.getElementById("special-defense")
 const speed=document.getElementById("speed")
 const imageContainer=document.getElementById("image-container")
-let alldata=[]
 
-btn.addEventListener("click",()=>{
-    getPokemon()
-    pokemonTypes.innerHTML=" "  
-    inputval.value=" "
-   
-})
-function getPokemon(){ 
-    if(inputval.value==="Red"){
-        alert("Pokémon not found")
-    }
-    fetch("https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/"+inputval.value).then((response)=>response.json()).then((data)=>{
-        console.log(data)
-        alldata = data
-        displayData(alldata)
-    }).catch((err)=>{
-        console.log("error")
-    })
-}
-const displayData = (pokemon) => {
-    const { height, weight, id, sprites, name, stats, types} = pokemon;
-    pokemonHeight.innerHTML = `${height}`;
-    pokemonWeight.innerHTML = `${weight}`;
-    pokemonId.innerHTML = `${id}`;
-    pokemonName.innerHTML = `${name.toUpperCase()}`;
+const getPokemon = async () => {
+    try{
 
-
-    // Handle multiple types
-    let typesString = "";
-    types.forEach((typeData, index) => {
-        console.log("Type Data:", typeData); // Log each type data for debugging
-        typesString += typeData.type.name;
-        if (index < types.length - 1) {
-            typesString += " ";
-        }
-    });
-
-     // Log the final types string for debugging
-
-    pokemonTypes.innerHTML = `${typesString.toUpperCase()}`;
+        const response = await fetch(
+            "https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/"+inputval.value.toLowerCase()
+        );
+        const data = await response.json();
     
+        // Set Pokémon info
+        pokemonName.textContent = `${data.name.toUpperCase()}`;
+        pokemonId.textContent = `#${data.id}`;
+        pokemonWeight.textContent  = `Weight: ${data.weight}`;
+        pokemonHeight.textContent = `Height: ${data.height}`;
+        imageContainer.innerHTML = `
+          <img id="sprite" src="${data.sprites.front_default}" alt="${data.name} front default sprite">
+        `;
+  
+        // Set stats
+        Hp.textContent= data.stats[0].base_stat;
+        attack.textContent = data.stats[1].base_stat;
+        defence.textContent = data.stats[2].base_stat;
+        specialAttack.textContent = data.stats[3].base_stat;
+        specialDefence.textContent = data.stats[4].base_stat;
+        speed.textContent = data.stats[5].base_stat;
+  
+        // Set types
+        pokemonTypes.innerHTML = data.types
+          .map(obj => `<span class="type ${obj.type.name.toUpperCase()}">${obj.type.name.toUpperCase()}</span>`)
+          .join("");
 
-    // Add logic to handle sprites if needed
-    if (sprites) {
-        imageContainer.innerHTML += `<img id="sprite" src="${sprites.front_default}?size=70" alt="${name} front default sprite" style="width: calc(55% + 20px); height: calc(50% + 20px);">`;
+      
     }
+    catch (err) {
+        resetDisplay();
+        alert("Pokémon not found");
+        console.log(`Pokémon not found: ${err}`);
+      };
+  };
+  
 
-   
-
-
-    Hp.innerHTML+=`${stats[0].base_stat}`
-    attack.innerHTML+=`${stats[1].base_stat}`
-    defence.innerHTML+=`${stats[2].base_stat}`
-    specialAttack.innerHTML+=`${stats[3].base_stat}`
-    specialDefence.innerHTML+=`${stats[4].base_stat}`
-    speed.innerHTML+=`${stats[5].base_stat}`
-    
-
-};
-
-function resetAll(){
-    inputval.value=" "
-    Hp.innerHTML=" "
-    attack.innerHTML=" "
-    defence.innerHTML=" "
-    specialAttack.innerHTML=" "
-    specialDefence.innerHTML=" "
-    speed.innerHTML=" "
-    imageContainer.innerHTML=""
-    pokemonHeight.innerHTML=" "
-    pokemonWeight.innerHTML=" "
-    pokemonName.innerHTML=" "
-    pokemonId.innerHTML=" "
-   
-}
+  const resetDisplay = () => {
+    const sprite = document.getElementById("sprite");
+    if (sprite) sprite.remove();
+  
+    // reset stats
+    pokemonName.textContent = "";
+    pokemonId.textContent = "";
+    pokemonTypes.innerHTML = "";
+    pokemonHeight.textContent = "";
+    pokemonWeight.textContent = "";
+    hp.textContent = "";
+    attack.textContent = "";
+    defence.textContent = "";
+    specialAttack.textContent = "";
+    specialDefence.textContent = "";
+    speed.textContent = "";
+  };
+  
+  btn.addEventListener("click", (e) => {
+    getPokemon();
+  });
